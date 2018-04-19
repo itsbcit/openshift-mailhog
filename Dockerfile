@@ -20,6 +20,7 @@ RUN chmod -R 555 /docker-entrypoint.*
 RUN chmod 664 /etc/passwd /etc/group
 
 COPY 50-create-authfile.sh /docker-entrypoint.d/
+RUN chmod 555 /docker-entrypoint.d/50-create-authfile.sh
 
 USER mailhog
 WORKDIR /home/mailhog
