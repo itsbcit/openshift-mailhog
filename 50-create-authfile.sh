@@ -1,1 +1,1 @@
-echo "admin:`/usr/local/bin/MailHog bcrypt ${MAILHOG_PASS}`" > /home/mailhog/authfile
+echo "admin:`/usr/local/bin/MailHog bcrypt ${MAILHOG_PASS}`" > /mailhog/authfile

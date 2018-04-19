@@ -20,10 +20,11 @@ RUN chmod -R 555 /docker-entrypoint.*
 RUN chmod 664 /etc/passwd /etc/group
 
 COPY 50-create-authfile.sh /docker-entrypoint.d/
-RUN chmod 555 /docker-entrypoint.d/50-create-authfile.sh
+RUN mkdir /mailhog
+RUN chmod 474 /mailhog
 
 USER mailhog
 WORKDIR /home/mailhog
 
 ENTRYPOINT ["/sbin/tini", "--", "/docker-entrypoint.sh"]
-CMD ["MailHog","-auth-file=/home/mailhog/authfile"]
+CMD ["MailHog","-auth-file=/mailhog/authfile"]
