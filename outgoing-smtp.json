@@ -1,0 +1,7 @@
+{
+    "#SMTPOUT_SERVERNAME": {
+        "name": "#SMTPOUT_SERVERNAME",
+        "host": "#SMTPOUT_HOST",
+        "port": "#SMTPOUT_PORT"
+    }
+}

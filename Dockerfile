@@ -1,9 +1,12 @@
 FROM bcit/alpine
 
 # Script to hash password from MAILHOG_PASS envvar to authfile
-COPY 50-create-authfile.sh /docker-entrypoint.d/
-RUN mkdir /mailhog \
-    && chown root:root /mailhog \
+# and unconfigured outgoing smtp json file
+COPY 50-create-authfile.sh 50-configure-outgoing-smtp.sh \
+    /docker-entrypoint.d/
+COPY outgoing-smtp.json /mailhog/
+
+RUN chown root:root /mailhog \
     && chmod 474 /mailhog
 
 # START Mailhog specifics from https://github.com/mailhog/MailHog/blob/master/Dockerfile
@@ -28,5 +31,5 @@ USER mailhog
 WORKDIR /home/mailhog
 # END Mailhog specifics
 
-CMD ["MailHog","-auth-file=/mailhog/authfile"]
+CMD ["MailHog","-auth-file=/mailhog/authfile", "-outgoing-smtp=/mailhog/outgoing-smtp.json"]
 EXPOSE 1025 8025
