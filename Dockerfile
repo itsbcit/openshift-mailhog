@@ -2,7 +2,7 @@ FROM bcit/alpine
 
 # Script to hash password from MAILHOG_PASS envvar to authfile
 # and unconfigured outgoing smtp json file
-COPY 50-create-authfile.sh 50-configure-outgoing-smtp.sh \
+COPY 50-create-authfile.sh 50-configure-outgoing-smtp.sh 99-wait-for-mongo.sh \
     /docker-entrypoint.d/
 COPY outgoing-smtp.json /mailhog/
 
