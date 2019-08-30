@@ -1,0 +1,4 @@
+---
+image_name: openshift-mailhog
+labels:
+  maintainer: 'chriswood.ca@gmail.com'

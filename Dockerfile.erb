@@ -1,6 +1,5 @@
 FROM bcit/alpine:3.10
-LABEL maintainer="chriswood.ca@gmail.com"
-LABEL build_id="1567197437"
+<%= snippet('labels', binding) -%>
 
 # Script to hash password from MAILHOG_PASS envvar to authfile
 # and unconfigured outgoing smtp json file
