@@ -1,6 +1,6 @@
 FROM bcit/alpine:3.10
 LABEL maintainer="chriswood.ca@gmail.com"
-LABEL build_id="1567197629"
+LABEL build_id="1574714825"
 
 # Script to hash password from MAILHOG_PASS envvar to authfile
 # and unconfigured outgoing smtp json file
@@ -8,8 +8,9 @@ COPY 50-create-authfile.sh 50-configure-outgoing-smtp.sh 99-wait-for-mongo.sh \
     /docker-entrypoint.d/
 COPY outgoing-smtp.json /mailhog/
 
-RUN chown root:root /mailhog \
-    && chmod 474 /mailhog
+RUN adduser -D -u 1000 mailhog \
+ && chown mailhog:root /mailhog \
+ && chmod 774 /mailhog
 
 # START Mailhog specifics from https://github.com/mailhog/MailHog/blob/master/Dockerfile
 # Install ca-certificates, required for the "release message" feature:
@@ -28,7 +29,6 @@ RUN apk --no-cache add --virtual build-dependencies \
   && rm -rf /root/gocode \
   && apk del --purge build-dependencies
 
-RUN adduser -D -u 1000 mailhog
 USER mailhog
 WORKDIR /home/mailhog
 # END Mailhog specifics
